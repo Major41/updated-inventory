@@ -65,7 +65,7 @@ const EquipmentChart = () => {
   };
 
   return (
-    <div className="bg-white p-6 shadow-md rounded-lg">
+    <div className="w-[95%] mx-auto bg-white p-6 shadow-md rounded-lg mt-5">
       <h2 className="text-xl font-bold mb-4 text-center">Equipment Categories Chart</h2>
       <Bar data={data} options={options} />
     </div>

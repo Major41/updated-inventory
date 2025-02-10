@@ -9,7 +9,7 @@ export default function LandingPage() {
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-800 text-white">
         {/* Hero Section */}
-        <header className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-16 gap-8 lg:py-24">
+        <header className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto px-6 pt-16 gap-8 lg:pt-24">
           {/* Text Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -34,7 +34,30 @@ export default function LandingPage() {
               is your strategic partner, providing a comprehensive solution for
               tracking, managing, and optimizing your robotic assets.
             </p>
-            <section className="mt-8">
+            
+          </motion.div>
+
+          {/* Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="lg:w-1/2"
+          >
+            <img
+              src={img}
+              alt="Lab Equipment"
+              className="w-full rounded-lg shadow-lg"
+            />
+          </motion.div>
+        </header>
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="w-[90%] mx-auto mb-8"
+          >
+          <section className="mt-8">
               <h2 className="text-3xl font-semibold">Lab Items Categories</h2>
               <div className="mt-4 grid grid-cols-4 gap-4">
                 <p className="p-2 bg-blue-950 text-center rounded-md">DEMO</p>
@@ -58,23 +81,7 @@ export default function LandingPage() {
                 </p>
               </div>
             </section>
-          </motion.div>
-
-          {/* Hero Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="lg:w-1/2"
-          >
-            <img
-              src={img}
-              alt="Lab Equipment"
-              className="w-full rounded-lg shadow-lg"
-            />
-          </motion.div>
-        </header>
-
+        </motion.div>
         <Footer />
       </div>
     </div>

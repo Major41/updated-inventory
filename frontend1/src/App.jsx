@@ -24,6 +24,7 @@ import Trolley from './Components/Labs/Trolley';
 import Components from './Components/Labs/Components';
 import BorrowForm from './Components/UserComponents/BorrowForm';
 import Bars from './Components/Labs/Bars';
+import Door2 from './Components/Labs/Door2';
 import LabAStudent from './Components/Labs/LabAStudent';
 import StudentLabs from './Components/Labs/StudentLabs';
 import ProtectedRoute from './AuthContext/ProtectedRoute';
@@ -58,8 +59,8 @@ function App() {
             <Route path="" element={<LabSelection />} />
             <Route path="labA" element={<LabAStorage />} />
             <Route path="labB" element={<LabBStorage />} />
-            <Route path="labA/door" element={<SectionSetup />} />
-            <Route path="labA/door" element={<SectionSetup />} />
+            <Route path="labA/door2" element={<SectionSetup />} />
+            <Route path="labA/door2" element={<SectionSetup />} />
             <Route path="labA/shelf" element={<Shelves />} />
             <Route path="labA/trolley" element={<Trolley />} />
             <Route path="labA/components" element={<Components />} />
@@ -81,8 +82,8 @@ function App() {
             <Route path="labA" element={<LabAStudent />} />
             <Route path="labB" element={<LabBStorage />} />
             <Route path="labB/bars" element={<Bars />} />
-            <Route path="labA/door" element={<SectionSetup />} />
-            <Route path="labA/door" element={<SectionSetup />} />
+            <Route path="labA/door2" element={<SectionSetup />} />
+            <Route path="labA/door2" element={<SectionSetup />} />
             <Route path="labA/shelf" element={<Shelves />} />
             <Route path="labA/trolley" element={<Trolley />} />
             <Route path="labA/components" element={<Components />} />
