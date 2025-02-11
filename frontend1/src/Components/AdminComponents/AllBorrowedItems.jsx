@@ -18,7 +18,7 @@ const AllBorrowedItems = () => {
           'http://localhost:5000/api/borrows'
         );
         setBorrowedItems(response.data);
-        console.log(response.data)
+       
     
       } catch (err) {
         setError(

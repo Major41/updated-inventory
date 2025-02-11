@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://your-production-url.com'], // Add production URL here
+    origin: ['http://localhost:5173', 'https://robo-lab-system.netlify.app'], // Add production URL here
     credentials: true, // Allow cookies
   })
 );

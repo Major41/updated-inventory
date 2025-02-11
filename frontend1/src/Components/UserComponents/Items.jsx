@@ -10,6 +10,7 @@ const ItemList = () => {
     const fetchItems = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/items/');
+        console.log(response.data);
         setItems(response.data);
       } catch (error) {
         console.error('Error fetching items:', error.message);
@@ -44,17 +45,27 @@ const ItemList = () => {
           filteredItems.map((item) => (
             <div
               key={item._id}
-              className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center"
+              className="bg-white border-t-2 border-blue-300 border-l-2 rounded-xl w-full shadow-lg py-2 flex flex-col items-center mx-6"
             >
-              <div className="w-full h-40 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                <span className="text-gray-500 text-lg">Image Placeholder</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-800">
-                {item.name}
-              </h3>
-              <p className="text-gray-600 mt-1">Category: {item.category}</p>
-              <p className="text-gray-600">Quantity: {item.quantity}</p>
-              <Link to='borrowed/borrow' className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+              
+              
+                <div className='flex items-center justify-between px-5 gap-18 pb-1 border-b w-full'>
+                  <p className='font-semibold'> {item.lab} </p>
+                  <p className='font-semibold'> {item.location} </p>
+                </div>
+
+                <div className='mt-10 w-full px-4 '>
+                  <h2 className='mb-2 font-semibold text-3xl'> {item.name} </h2>
+                  <h2 className='mb-2 font-bold text-blue-400'> {item.section} </h2>
+
+                  <div>
+                    <p>Total Quantity: {item.quantity} </p>
+                    <p>Current Quantity: {item.quantity} </p>
+                  </div>
+                </div>
+                
+                
+              <Link to='borrowed/borrow' className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition  mx-6">
                 Borrow
               </Link>
             </div>

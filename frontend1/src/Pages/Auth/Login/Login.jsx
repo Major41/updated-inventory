@@ -23,8 +23,8 @@ const Login = () => {
   return (
     <div className="h-screen w-screen ">
       <Bhome />
-      <div className="min-h-screen w-full flex justify-center items-center bg-gradient-to-br from-blue-300 to-blue-800">
-        <div className="bg-white p-6 rounded-lg shadow-md w-80">
+      <div className="min-h-screen w-full flex justify-center items-center bg-gray-100">
+        <div className="bg-white border-2 p-6 rounded-lg shadow-lg w-80">
           <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">

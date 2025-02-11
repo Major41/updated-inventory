@@ -4,7 +4,7 @@ import { useAuth } from './AuthContext'
 const PrivateRoute = ({ role }) => {
   const { user, loading } = useAuth();
 
-   console.log("PrivateRoute - User:", user);
+   
   if (loading) {
     return <div>Protected Loading...</div>; // You can add a loader here if needed
   }

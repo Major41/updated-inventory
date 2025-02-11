@@ -2,12 +2,13 @@ import { motion } from 'framer-motion';
 import img from '../../images/logimage.png';
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/Navbar';
+import ItemList from '../../Components/Items/Items';
 
 export default function LandingPage() {
   return (
     <div className="h-screen w-screen">
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-400 to-blue-800 text-white">
+      <div className="min-h-screen bg-gray-100 text-gray-700">
         {/* Hero Section */}
         <header className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto px-6 pt-16 gap-8 lg:pt-24">
           {/* Text Section */}
@@ -24,15 +25,13 @@ export default function LandingPage() {
                 Assets with RoboLend
               </span>
             </h1>
-            <p className="text-lg mt-4 text-gray-200">
+            <p className="text-lg mt-4 text-gray-700">
               Welcome to the next era in robotic inventory management. RoboLend
               is your strategic partner, providing a comprehensive solution for
               tracking, managing, and optimizing your robotic assets.
             </p>
-            <p className="text-lg mt-4 text-gray-200">
-              Welcome to the next era in robotic inventory management. RoboLend
-              is your strategic partner, providing a comprehensive solution for
-              tracking, managing, and optimizing your robotic assets.
+            <p className="text-lg mt-4 text-gray-700">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aliquid alias dolores provident quos nostrum distinctio modi odio quia nobis!
             </p>
             
           </motion.div>
@@ -55,32 +54,9 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="w-[90%] mx-auto mb-8"
+            className="my-8"
           >
-          <section className="mt-8">
-              <h2 className="text-3xl font-semibold">Lab Items Categories</h2>
-              <div className="mt-4 grid grid-cols-4 gap-4">
-                <p className="p-2 bg-blue-950 text-center rounded-md">DEMO</p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">LEVERS</p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">
-                  ROBOTICS
-                </p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">RELAYS</p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">
-                  SENSORS
-                </p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">MOTORS</p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">
-                  CIRCUITS
-                </p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">
-                  ACTUATORS
-                </p>
-                <p className="p-2 bg-blue-950 text-center rounded-md">
-                  GRIPPERS
-                </p>
-              </div>
-            </section>
+            <ItemList/>
         </motion.div>
         <Footer />
       </div>

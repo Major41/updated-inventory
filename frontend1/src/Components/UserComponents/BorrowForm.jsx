@@ -1,25 +1,58 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {useAuth} from '../../AuthContext/AuthContext'
+import { useAuth } from '../../AuthContext/AuthContext';
 
 const BorrowForm = () => {
-
-  const {user} = useAuth()
+  const { user } = useAuth();
   const [equipmentName, setEquipmentName] = useState('');
   const [studentName, setStudentName] = useState('');
   const [studentEmail, setStudentEmail] = useState('');
   const [returnDate, setReturnDate] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState([]); // Store available items
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/items/');
+        setItems(response.data);
+      } catch (error) {
+        console.error('Error fetching items:', error.message);
+      }
+    };
+    fetchItems();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-     
 
+    // Validate email
+    if (studentEmail !== user?.email) {
+      alert('Please use your own email');
+      setLoading(false);
+      return;
+    }
+
+    // Find the selected equipment
+    const selectedItem = items.find(item => item.name.toLowerCase() === equipmentName.toLowerCase());
+
+    if (!selectedItem) {
+      alert('Equipment not found');
+      setLoading(false);
+      return;
+    }
+
+    if (quantity > selectedItem.quantity) {
+      alert(`Only ${selectedItem.quantity} items available. Cannot borrow more.`);
+      setLoading(false);
+      return;
+    }
+
+    try {
       await axios.post(
         'http://localhost:5000/api/borrow',
         {
@@ -32,25 +65,28 @@ const BorrowForm = () => {
         { withCredentials: true }
       );
 
-        if(studentEmail !== user?.email){
-          alert('Please use your own email')
-        }
+      // Update item quantity locally after a successful request
+      setItems(prevItems =>
+        prevItems.map(item =>
+          item.name.toLowerCase() === equipmentName.toLowerCase()
+            ? { ...item, quantity: item.quantity - quantity }
+            : item
+        )
+      );
 
-      //   alert('Request sent successfully');
       navigate('/Student/borrowed');
     } catch (error) {
       console.error('Error borrowing item:', error);
       alert('Failed to borrow item');
     }
+
     setLoading(false);
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-center mb-4">
-          Borrow Equipment
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-4">Borrow Equipment</h2>
         <form onSubmit={handleSubmit} className="space-y-4 flex flex-col gap-5">
           <div>
             <label className="block font-semibold">Equipment Name</label>
@@ -67,7 +103,7 @@ const BorrowForm = () => {
             <input
               type="number"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(Number(e.target.value))}
               required
               className="w-full p-2 border rounded-lg"
             />
