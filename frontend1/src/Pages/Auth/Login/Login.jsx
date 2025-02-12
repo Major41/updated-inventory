@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../../AuthContext/AuthContext'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Bhome from '../../../Components/BHOME/Bhome';
 
 const Login = () => {
@@ -51,7 +51,9 @@ const Login = () => {
               Login
             </button>
           </form>
-          
+          <div>
+            <p className='text-center text-lg'>Don't have an account? <Link className='text-blue-700 hover:underline ' to='/register' >Register</Link> </p>
+          </div>
         </div>
       </div>
     </div>

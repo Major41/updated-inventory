@@ -4,26 +4,31 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <div className="fixed w-screen">
-      <nav className="bg-blue-700 text-white py-4 px-6 md:px-12 flex items-center justify-between shadow-md">
+      <nav className="bg-blue-700 text-white py-2 px-6 md:px-12 flex items-center justify-between shadow-md">
         {/* Logo */}
         <div className="text-2xl font-bold">
           <Link to="/">ROBO LAB</Link>
         </div>
 
         {/* Buttons */}
+        <div className="hidden md:flex flex-col items-center gap-4 space-x-4">
+          <div>
+            <p>MENU</p>
+          </div>
         <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
-            className="bg-transparent border text-gray-100 border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 transition duration-300"
+            className="bg-transparent border text-gray-100 border-white px-2 py-1 rounded-sm hover:bg-white hover:text-blue-700 transition duration-300"
           >
-            Login
+            Staff
           </Link>
           <Link
-            to="/register"
-            className="bg-white text-blue-700 px-4 py-2 rounded-lg hover:bg-transparent hover:text-white border border-white transition duration-300"
+            to="/login"
+            className="text-white px-2 py-1 rounded-sm hover:bg-white hover:text-blue-700 border border-white transition duration-300"
           >
-            Sign Up
+            Student
           </Link>
+        </div>
         </div>
 
         {/* Mobile Menu Button */}
