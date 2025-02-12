@@ -33,12 +33,10 @@ export const AuthProvider = ({ children }) => {
       const response = await API.post(
         '/api/users/login',
         { email, password },
-        
+       { withCredentials: true},
       );
-
-      if (response.data) {
-        await fetchUser(); // Fetch user ONLY after successful login
-      }
+        setUser(response.data);
+      console.log(response.data)
 
       if (response.data.role === 'admin') {
         navigate('/Staff'); // Redirect to the admin dashboard
