@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API from '../../API/Api';
+
 const ItemForm = () => {
   const [lab, setLab] = useState('');
   const [location, setLocation] = useState('');
@@ -67,7 +69,7 @@ const ItemForm = () => {
 
     try {
       // Make the API request using Axios
-      const response = await axios.post('http://localhost:5000/api/items/add', {
+      const response = await API.post('/api/items/add', {
         lab,
         location,
         section,

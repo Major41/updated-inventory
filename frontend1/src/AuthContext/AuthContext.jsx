@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import API from '../API/Api';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -12,8 +12,8 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        'http://localhost:5000/api/users/getuser',
+      const response = await API.get(
+        '/api/users/getuser',
         {
           withCredentials: true,
         }
@@ -30,10 +30,10 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        'http://localhost:5000/api/users/login',
+      const response = await API.post(
+        '/api/users/login',
         { email, password },
-        { withCredentials: true }
+        
       );
 
       if (response.data) {
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.get('http://localhost:5000/api/users/logout', {
+      await API.get('/api/users/logout', {
         withCredentials: true,
       });
       setUser(null);

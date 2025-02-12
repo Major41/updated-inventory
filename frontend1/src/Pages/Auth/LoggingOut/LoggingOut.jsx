@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import API from '../../../API/Api';
 const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.get(
-        'http://localhost:5000/api/users/logout',
+      await API.get(
+        '/api/users/logout',
 
         {
           withCredentials: true, // Ensure cookies are sent with the request

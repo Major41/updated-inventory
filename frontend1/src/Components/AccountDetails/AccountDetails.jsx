@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaPhone, FaEdit, FaTimes } from 'react-icons/fa';
 import { useAuth } from '../../AuthContext/AuthContext';
-
+import API from '../../API/Api'; 
 const AccountDetails = () => {
   const { user } = useAuth();
   const [userDetails, setUserDetails] = useState(null);
@@ -25,8 +25,8 @@ const AccountDetails = () => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(
-        'http://localhost:5000/api/users/updateuser',
+      await API.patch(
+        '/api/users/updateuser',
         updatedDetails
       );
 

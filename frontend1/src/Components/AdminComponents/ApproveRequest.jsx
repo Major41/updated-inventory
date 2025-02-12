@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-
+import API from '../../API/Api';
 // Approve borrow function that calls the backend to approve the request
 const approveBorrow = async (borrowId) => {
   try {
-    const response = await axios.patch(
-      `http://localhost:5000/api/approve/${borrowId}`
+    const response = await API.patch(
+      `/api/approve/${borrowId}`
     );
     if (response.status === 200) {
       alert('Request approved');

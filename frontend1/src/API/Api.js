@@ -1,11 +1,8 @@
-// src/api.js
 import axios from 'axios';
 
-const Api = axios.create({
-  baseURL: 'http://localhost:5000/api/items', // Your backend URL
-  headers: {
-    'Content-Type': 'application/json',
-  },
+const API = axios.create({
+  baseURL: 'https://updated-inventory.onrender.com',
+  withCredentials: true, // Ensures cookies/session handling
 });
 
-export default Api;
+export default API;

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import addItem from '../AdminComponents/AddItemForm'
+import API from '../../API/Api';
 const ItemList = () => {
   const [items, setItems] = useState([]);
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const role = storedUser?.role;
   const fetchItems = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/items/');
+      const response = await API.get('/api/items/');
      
       setItems(response.data);
     } catch (error) {
@@ -22,7 +22,7 @@ const ItemList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/items/${id}`);
+      await API.delete(`/api/items/${id}`);
       alert('Item deleted successfully');
       fetchItems(); // Refresh the list after deletion
     } catch (error) {

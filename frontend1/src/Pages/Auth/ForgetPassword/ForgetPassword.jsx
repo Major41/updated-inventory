@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Bhome from '../../../Components/BHOME/Bhome';
-
+import API from '../../../API/Api';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -15,8 +15,8 @@ const ForgotPassword = () => {
     setError('');
 
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/users/forgotpassword',
+      const response = await API.post(
+        '/api/users/forgotpassword',
         { email }
       );
       setMessage(response.data.message || 'Reset link sent to your email.');

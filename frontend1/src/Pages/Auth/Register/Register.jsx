@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Bhome from '../../../Components/BHOME/Bhome';
-
+import API from '../../../API/Api';
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -30,8 +30,8 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/users/register',
+      const response = await API.post(
+        '/api/users/register',
         { name, email, password, role }
       );
 

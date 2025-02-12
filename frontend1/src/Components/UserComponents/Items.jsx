@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import API from '../../API/Api';
 const ItemList = () => {
   const [items, setItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
@@ -9,7 +9,7 @@ const ItemList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items/');
+        const response = await API.get('/api/items/');
         console.log(response.data);
         setItems(response.data);
       } catch (error) {

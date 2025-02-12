@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
-
+import API from '../../API/Api';
 const BorrowForm = () => {
   const { user } = useAuth();
   const [equipmentName, setEquipmentName] = useState('');
@@ -17,7 +17,7 @@ const BorrowForm = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items/');
+        const response = await API.get('/api/items/');
         setItems(response.data);
       } catch (error) {
         console.error('Error fetching items:', error.message);
@@ -53,8 +53,8 @@ const BorrowForm = () => {
     }
 
     try {
-      await axios.post(
-        'http://localhost:5000/api/borrow',
+      await API.post(
+        '/api/borrow',
         {
           studentName,
           equipmentName,

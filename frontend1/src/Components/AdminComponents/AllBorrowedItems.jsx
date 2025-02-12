@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../AuthContext/AuthContext';
 import ApproveRequest from './ApproveRequest';
+import API from '../../API/Api';
 
 const AllBorrowedItems = () => {
   const { user } = useAuth();
@@ -14,8 +15,8 @@ const AllBorrowedItems = () => {
       if (!user.email) return; // Avoid making request if email is not available yet
 
       try {
-        const response = await axios.get(
-          'http://localhost:5000/api/borrows'
+        const response = await API.get(
+          '/api/borrows'
         );
         setBorrowedItems(response.data);
        

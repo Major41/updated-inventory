@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import API from '../../API/Api';
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,8 +9,8 @@ const StudentList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(
-          'http://localhost:5000/api/users/getstudents'
+        const response = await API.get(
+          '/api/users/getstudents'
         );
         setStudents(response.data.users);
         setLoading(false);
