@@ -16,7 +16,9 @@ function Welcome() {
             tracking, managing, and optimizing your robotic assets.{' '}
           </p>
         </div>
+        <div className="hidden md:block">
         <BorrowedItems/>
+        </div>
       </div>
       <Items/>
     </div>

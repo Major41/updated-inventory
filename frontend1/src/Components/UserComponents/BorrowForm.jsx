@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
 import API from '../../API/Api';
+
 const BorrowForm = () => {
   const { user } = useAuth();
   const [equipmentName, setEquipmentName] = useState('');
-  const [studentName, setStudentName] = useState('');
-  const [studentEmail, setStudentEmail] = useState('');
   const [returnDate, setReturnDate] = useState('');
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]); // Store available items
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Fetch available items
     const fetchItems = async () => {
       try {
         const response = await API.get('/api/items/');
@@ -24,21 +23,21 @@ const BorrowForm = () => {
       }
     };
     fetchItems();
+
+    // Set return date (2 weeks from today)
+    const twoWeeksLater = new Date();
+    twoWeeksLater.setDate(twoWeeksLater.getDate() + 14);
+    setReturnDate(twoWeeksLater.toISOString().split('T')[0]);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Validate email
-    if (studentEmail !== user?.email) {
-      alert('Please use your own email');
-      setLoading(false);
-      return;
-    }
-
-    // Find the selected equipment
-    const selectedItem = items.find(item => item.name.toLowerCase() === equipmentName.toLowerCase());
+    // Find selected equipment
+    const selectedItem = items.find(
+      (item) => item.name.toLowerCase() === equipmentName.toLowerCase()
+    );
 
     if (!selectedItem) {
       alert('Equipment not found');
@@ -47,7 +46,7 @@ const BorrowForm = () => {
     }
 
     if (quantity > selectedItem.quantity) {
-      alert(`Only ${selectedItem.quantity} items available. Cannot borrow more.`);
+      alert(`Only ${selectedItem.quantity} items available.`);
       setLoading(false);
       return;
     }
@@ -56,25 +55,25 @@ const BorrowForm = () => {
       await API.post(
         '/api/borrow',
         {
-          studentName,
+          studentName: user?.name,
           equipmentName,
-          studentEmail,
+          studentEmail: user?.email,
           returnDate,
           quantity,
         },
         { withCredentials: true }
       );
 
-      // Update item quantity locally after a successful request
-      setItems(prevItems =>
-        prevItems.map(item =>
+      // Update item quantity locally
+      setItems((prevItems) =>
+        prevItems.map((item) =>
           item.name.toLowerCase() === equipmentName.toLowerCase()
             ? { ...item, quantity: item.quantity - quantity }
             : item
         )
       );
 
-      navigate('/Student/borrowed');
+      navigate('/student/borrowed');
     } catch (error) {
       console.error('Error borrowing item:', error);
       alert('Failed to borrow item');
@@ -84,66 +83,90 @@ const BorrowForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-center mb-4">Borrow Equipment</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 flex flex-col gap-5">
+    <div className="flex justify-center items-center min-h-screen p-4">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md md:max-w-lg">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
+          Borrow Equipment
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Equipment Name */}
           <div>
-            <label className="block font-semibold">Equipment Name</label>
+            <label className="block font-semibold text-gray-700">
+              Equipment Name
+            </label>
             <input
               type="text"
               value={equipmentName}
               onChange={(e) => setEquipmentName(e.target.value)}
               required
-              className="w-full p-2 border rounded-lg bg-gray-100"
+              className="w-full p-2 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
+          {/* Quantity */}
           <div>
-            <label className="block font-semibold">Quantity</label>
+            <label className="block font-semibold text-gray-700">
+              Quantity
+            </label>
             <input
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
               required
-              className="w-full p-2 border rounded-lg"
+              min="1"
+              className="w-full p-2 border rounded-lg bg-gray-100 focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
+          {/* User Name (Read-only) */}
           <div>
-            <label className="block font-semibold">Your Name</label>
+            <label className="block font-semibold text-gray-700">
+              Your Name
+            </label>
             <input
               type="text"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-              required
-              className="w-full p-2 border rounded-lg"
+              value={user?.name || ''}
+              readOnly
+              className="w-full p-2 border rounded-lg bg-gray-200 text-gray-600 cursor-not-allowed"
             />
           </div>
 
+          {/* User Email (Read-only) */}
           <div>
-            <label className="block font-semibold">Your Email</label>
+            <label className="block font-semibold text-gray-700">
+              Your Email
+            </label>
             <input
               type="email"
-              value={studentEmail}
-              onChange={(e) => setStudentEmail(e.target.value)}
-              required
-              className="w-full p-2 border rounded-lg"
+              value={user?.email || ''}
+              readOnly
+              className="w-full p-2 border rounded-lg bg-gray-200 text-gray-600 cursor-not-allowed"
             />
           </div>
 
+          {/* Return Date (Auto-filled, Read-only) */}
           <div>
-            <label className="block font-semibold">Return Date</label>
+            <label className="block font-semibold text-gray-700">
+              Return Date
+            </label>
             <input
               type="date"
               value={returnDate}
-              onChange={(e) => setReturnDate(e.target.value)}
-              required
-              className="w-full p-2 border rounded-lg"
+              readOnly
+              className="w-full p-2 border rounded-lg bg-gray-200 text-gray-600 cursor-not-allowed"
             />
           </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
-            className="w-full bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 transition"
+            disabled={loading || !equipmentName || quantity < 1}
+            className={`w-full p-2 rounded-lg text-white font-semibold transition 
+              ${
+                loading || !equipmentName || quantity < 1
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700'
+              }`}
           >
             {loading ? 'Submitting...' : 'Borrow'}
           </button>

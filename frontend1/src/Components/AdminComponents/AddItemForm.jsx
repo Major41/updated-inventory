@@ -110,7 +110,7 @@ const ItemForm = () => {
       <Toaster />
       <form
         onSubmit={handleSubmit}
-        className="max-w-3xl text-black mx-auto bg-white shadow-lg rounded-lg p-6 space-y-6"
+        className="max-w-3xl my-8 text-black mx-auto bg-white shadow-lg rounded-lg p-6 space-y-6"
       >
         <h2 className="text-2xl font-bold text-gray-800">Add Item</h2>
 
@@ -206,7 +206,7 @@ const ItemForm = () => {
             placeholder="Item Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full border-gray-300 h-8 pl-1.5 outline-none rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
@@ -223,7 +223,7 @@ const ItemForm = () => {
             placeholder="Item Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full outline-none border-gray-300 pl-1.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             rows={4}
             required
           ></textarea>
@@ -238,7 +238,7 @@ const ItemForm = () => {
             id="quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full outline-none border-gray-300 h-8 pl-1.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
@@ -253,7 +253,7 @@ const ItemForm = () => {
             placeholder="Admin Name"
             value={adminUser}
             onChange={(e) => setAdminUser(e.target.value)}
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full outline-none border-gray-300 h-8 pl-1.5 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>

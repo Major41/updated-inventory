@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaPhone, FaEdit, FaTimes } from 'react-icons/fa';
 import { useAuth } from '../../AuthContext/AuthContext';
-import API from '../../API/Api'; 
+import API from '../../API/Api';
 const AccountDetails = () => {
   const { user } = useAuth();
   const [userDetails, setUserDetails] = useState(null);
@@ -25,10 +25,7 @@ const AccountDetails = () => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.patch(
-        '/api/users/updateuser',
-        updatedDetails
-      );
+      await API.patch('/api/users/updateuser', updatedDetails);
 
       setIsEditing(false);
       setUserDetails((prev) => ({ ...prev, ...updatedDetails }));
@@ -66,7 +63,7 @@ const AccountDetails = () => {
             </div>
             <button
               onClick={() => setIsEditing(true)}
-              className="bg-blue-600 text-white flex items-center gap-2 py-2 px-4 rounded hover:bg-blue-700 cursor-pointer"
+              className="bg-blue-600 text-white flex items-center gap-2 py-2 px-4 rounded hover:bg-blue-900 cursor-pointer"
             >
               <FaEdit /> Edit Details
             </button>

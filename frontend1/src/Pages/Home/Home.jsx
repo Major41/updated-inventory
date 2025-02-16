@@ -46,7 +46,7 @@ export default function LandingPage() {
             <img
               src={img}
               alt="Lab Equipment"
-              className="w-full rounded-lg shadow-lg"
+              className="w-full rounded-lg shadow-lg mt-8 md:mt-0"
             />
           </motion.div>
         </header>

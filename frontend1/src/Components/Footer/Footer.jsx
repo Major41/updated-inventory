@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-600 text-white py-8">
+    <footer className="bg-blue-900 text-white py-8 overflow-hidden">
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Robo Lab Section */}
         <div className="flex flex-col items-start">

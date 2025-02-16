@@ -8,8 +8,6 @@ import AdminDashboard from './Pages/Dashboards/AdminDashboard/AdminDashboard';
 import UserDashboard from './Pages/Dashboards/UserDashBoard/UserDashboard';
 import Welcome from './Components/UserComponents/Welcome';
 import BorrowedItems from './Components/UserComponents/BorrowedItems';
-import ExploreLabs from './Components/UserComponents/ExploreLabs';
-import Operation from './Components/AdminComponents/Operation';
 import EquipmentChart from './Components/AdminComponents/EquipmentChart';
 import StudentsList from './Components/AdminComponents/GetStudents';
 import AccountDetails from './Components/AccountDetails/AccountDetails';
@@ -24,13 +22,13 @@ import Trolley from './Components/Labs/Trolley';
 import Components from './Components/Labs/Components';
 import BorrowForm from './Components/UserComponents/BorrowForm';
 import Bars from './Components/Labs/Bars';
-import Door2 from './Components/Labs/Door2';
 import LabAStudent from './Components/Labs/LabAStudent';
 import StudentLabs from './Components/Labs/StudentLabs';
 import ProtectedRoute from './AuthContext/ProtectedRoute';
 import { AuthProvider } from './AuthContext/AuthContext';
 import AllBorrowedItems from './Components/AdminComponents/AllBorrowedItems';
 import ItemList from './Components/UserComponents/Items';
+import Items from './Components/AdminComponents/Items';
 function App() {
   return (
     <Router>
@@ -48,7 +46,7 @@ function App() {
             <Route path="" element={<EquipmentChart />} />
             <Route path="borrowed" element={<AllBorrowedItems />} />
             <Route path="labs" element={<Layout />} />
-            <Route path="items" element={<Operation />} />
+            <Route path="items" element={<Items />} />
             <Route path="students" element={<StudentsList />} />
             <Route path="profile" element={<AccountDetails />} />
             <Route path="addItem" element={<AddItem />} />
@@ -75,6 +73,7 @@ function App() {
             <Route path="search" element={<ItemList />} />
             <Route path="profile" element={<AccountDetails />} />
             <Route path="borrowed/borrow" element={<BorrowForm />} />
+            <Route path="search/borrowed/borrow" element={<BorrowForm />} />
           </Route>
 
           <Route path="/Student/labs/*" element={<Layout />}>

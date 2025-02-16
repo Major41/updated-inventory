@@ -26,8 +26,8 @@ const Wheader = () => {
   };
 
   return (
-    <div className="bg-blue-800 w-full flex justify-between items-center px-10 py-1.5 overflow-hidden relative z-10">
-      <h2 className="font-bold text-2xl text-white">ROBO LAB</h2>
+    <div className="bg-blue-900 w-full flex justify-between items-center px-10 py-1.5 overflow-hidden relative z-10">
+      <h2 className="font-bold text-2xl ml-10 md:ml-0 text-white">ROBO LAB</h2>
       <div className="relative flex justify-center items-center gap-3">
         <p className="text-white">Hi, {user?.name.split(' ')[0] || 'Guest'}</p>
         {/* User Icon */}

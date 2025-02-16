@@ -25,7 +25,7 @@ const StudentList = () => {
   }, []);
 
   return (
-    <div className="bg-gray-50 p-6 shadow-lg rounded-xl w-[90%] mx-auto mt-8">
+    <div className="bg-gray-50 p-6 shadow-lg rounded-xl w-[90%] mx-auto my-8">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
         Students List
       </h2>

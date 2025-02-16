@@ -23,7 +23,7 @@ const ItemList = () => {
   
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen flex flex-col w-full items-center">
+    <div className="p-6 bg-gray-100 min-h-screen flex flex-col w-[90%] mx-auto overflow-hidden items-center">
       <h2 className="text-3xl font-bold text-gray-800 mb-6">Equipments</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
@@ -62,7 +62,7 @@ const ItemList = () => {
             </div>
           ))
         ) : (
-          <p className="text-gray-500 text-center">No items found</p>
+          <p className="text-gray-500 text-center">Loading...</p>
         )}
       </div>
     </div>

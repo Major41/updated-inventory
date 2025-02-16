@@ -5,7 +5,7 @@ const LabSelection = () => {
   return (
     <div className="p-6 bg-gray-50 min-h-screen flex flex-col items-center pt-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Select a Lab</h1>
-      <div className="flex justify-around gap-6 w-[90%] mx-auto">
+      <div className="flex md:flex-row flex-col justify-around gap-6 w-[90%] mx-auto">
         <div className="flex flex-col gap-4 shadow-2xl py-8 px-5 rounded-lg">
           <h3 className="font-bold ">LAB A</h3>
           <p>

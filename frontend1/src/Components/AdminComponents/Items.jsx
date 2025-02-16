@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../../AuthContext/AuthContext';
 import API from '../../API/Api';
+import { Link } from 'react-router-dom';
 const ItemList = () => {
   const [items, setItems] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const response = await API.get('/api/items/');
-        console.log(response.data);
+
         setItems(response.data);
       } catch (error) {
         console.error('Error fetching items:', error.message);
@@ -19,30 +20,18 @@ const ItemList = () => {
     fetchItems();
   }, []);
 
-  // Filter items based on search term
-  const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
-    <div className="py-6 pr-4 md:p-6 bg-gray-100 min-h-screen flex flex-col items-center ">
+    <div className="p-6 bg-gray-100 min-h-screen flex flex-col items-center">
       <h2 className="text-3xl font-bold text-gray-800 mb-6">Equipments</h2>
-
-      {/* Search Bar */}
-      <div className="mb-6 w-full max-w-md">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search by name or category..."
-          className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-        />
-      </div>
-
+      <Link
+        to="/staff/addItem"
+        className="bg-green-600 py-1 text-white  text-right mb-4 font-semibold rounded-md  px-3"
+      >
+        Add Item
+      </Link>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-[90%] mx-auto -ml-4 md:ml-0">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
+        {items.length > 0 ? (
+          items.map((item) => (
             <div
               key={item._id}
               className="bg-white border-t-2 border-blue-300 border-l-2 rounded-xl w-full shadow-lg py-2 flex flex-col items-center mx-6"
@@ -64,13 +53,6 @@ const ItemList = () => {
                   <p>Current Quantity: {item.quantity} </p>
                 </div>
               </div>
-
-              <Link
-                to="borrowed/borrow"
-                className="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition  mx-6"
-              >
-                Borrow
-              </Link>
             </div>
           ))
         ) : (

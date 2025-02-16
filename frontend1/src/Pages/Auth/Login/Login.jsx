@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useAuth } from '../../../AuthContext/AuthContext'; 
 import { useNavigate, Link } from 'react-router-dom';
 import Bhome from '../../../Components/BHOME/Bhome';
-
+import Navbar from '../../../Components/Navbar/Navbar';
+import Footer from '../../../Components/Footer/Footer';
 const Login = () => {
   const { login } = useAuth()
   const [email, setEmail] = useState('');
@@ -21,9 +22,10 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen w-screen ">
+    <div className="h-full w-screen relative ">
+      <Navbar />
       <Bhome />
-      <div className="min-h-screen w-full flex justify-center items-center bg-gray-100">
+      <div className="min-h-screen  w-full flex justify-center items-center bg-gray-100">
         <div className="bg-white border-2 p-6 rounded-lg shadow-lg w-80">
           <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
           {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -52,10 +54,16 @@ const Login = () => {
             </button>
           </form>
           <div>
-            <p className='text-center text-lg'>Don't have an account? <Link className='text-blue-700 hover:underline ' to='/register' >Register</Link> </p>
+            <p className="text-center text-lg">
+              Don't have an account?{' '}
+              <Link className="text-blue-700 hover:underline " to="/register">
+                Register
+              </Link>{' '}
+            </p>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

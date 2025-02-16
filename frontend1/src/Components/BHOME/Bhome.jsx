@@ -6,7 +6,7 @@ function Bhome() {
     <div>
       <Link
         to="/"
-        className="fixed bg-blue-600 hover:bg-blue-800 rounded-md text-black py-2 px-4 cursor-pointer font-bold text-2xl m-8"
+        className=" absolute top-18 md:top-30 mx-10 p-3 font-bold rounded-md cursor-pointer hover:bg-blue-900  bg-blue-700 text-white"
       >
         Back Home
       </Link>

@@ -36,7 +36,7 @@ const AllBorrowedItems = () => {
   
 
   return (
-    <div className="w-[90%] mx-auto px-4 py-8 overflow-hidden ">
+    <div className="w-[95%] mx-auto px-4 py-8 overflow-hidden ">
       <h1 className="text-3xl font-semibold mb-6">Borrowed Equipment</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {!error && borrowedItems.length === 0 && (

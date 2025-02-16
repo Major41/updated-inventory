@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Outlet } from 'react-router-dom';
 import Wheader from '../../../Components/Wheader/Wheader';
 import Sidebar from '../../../Components/SideBar/SideBar';
-
+import Footer from '../../../Components/Footer/Footer';
 
 const UserDashboard = () => {
   const [user, setUser] = useState(null);
@@ -29,6 +29,7 @@ const UserDashboard = () => {
           <Outlet />
         </div>
       </div>
+    <Footer/>
     </div>
   );
 };

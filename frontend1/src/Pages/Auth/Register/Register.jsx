@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Bhome from '../../../Components/BHOME/Bhome';
 import API from '../../../API/Api';
+import Navbar from '../../../Components/Navbar/Navbar';
+import Footer from '../../../Components/Footer/Footer';
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -52,9 +54,10 @@ const RegisterPage = () => {
 
 
   return (
-    <div className="h-screen w-screen text-black">
+    <div className="h-full w-screen text-black">
+      <Navbar/>
       <Bhome />
-      <div className="h-full rounded-2xl flex items-center justify-center bg-gray-100 px-4">
+      <div className="h-full pt-32 mb-8 rounded-2xl flex items-center justify-center bg-gray-100 px-4">
         <ToastContainer />
         <div className="bg-gray-100 border-2 flex flex-col items-center justify-center p-8 rounded-xl shadow-md w-[500px]">
           <h2 className="text-3xl font-bold text-center text-gray-800">
@@ -164,6 +167,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

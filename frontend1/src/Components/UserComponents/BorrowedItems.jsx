@@ -33,7 +33,7 @@ const BorrowedItems = () => {
       <h1 className="text-3xl font-semibold mb-6">Borrowed Equipment</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {!error && borrowedItems.length === 0 && (
-        <p className="text-gray-500">No borrowed equipment found.</p>
+        <p className="text-gray-500">Loading...</p>
       )}
       {!error && borrowedItems.length > 0 && (
         <div className="overflow-x-auto shadow-xl rounded-lg">

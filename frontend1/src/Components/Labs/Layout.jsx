@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import Wheader from '../Wheader/Wheader';
 import Sidebar from '../SideBar/SideBar';
 import LabSelection from './StaffLabs';
-
+import Footer from '../Footer/Footer'
 function Layout() {
   const [user, setUser] = useState(null);
 
@@ -34,6 +34,7 @@ function Layout() {
           <Outlet />
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

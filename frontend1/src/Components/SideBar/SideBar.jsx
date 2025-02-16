@@ -9,11 +9,13 @@ import {
   FaBook,
   FaCheck,
 } from 'react-icons/fa';
+import { FiMenu, FiX } from 'react-icons/fi';
 import { useAuth } from '../../AuthContext/AuthContext';
 
 const Sidebar = () => {
   const { user } = useAuth();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const userMenu = [
     { label: 'Dashboard', icon: <FaHome />, route: '/student' },
@@ -35,35 +37,50 @@ const Sidebar = () => {
   const menu = user?.role === 'admin' ? adminMenu : userMenu;
 
   return (
-    <div
-      className={`${
-        isExpanded ? 'w-52' : 'w-16'
-      } min-h-screen bg-blue-800 text-white flex flex-col transition-all duration-300 overflow-hidden`}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
-    >
-      <ul className="flex-grow mt-4 space-y-2 px-2">
-        {menu.map((item, index) => (
-          <li
-            key={index}
-            className="p-3 rounded-md hover:bg-blue-700 cursor-pointer"
-          >
-            <NavLink
-              to={item.route}
-              className="flex items-center w-full"
-              activeClassName="bg-blue-700 text-white"
-            >
-              <span className="text-lg">{item.icon}</span>
-              {isExpanded && (
-                <span className="text-md ml-2 font-medium">{item.label}</span>
-              )}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+    <div className="text-black">
+      {/* Menu Button for Small Screens */}
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="md:hidden fixed top-2 left-4 z-20 bg-blue-900 text-white p-2 rounded-md"
+      >
+        {isMenuOpen ? (
+          <FiX className="text-2xl cursor-pointer" />
+        ) : (
+          <FiMenu className="text-2xl cursor-pointer" />
+        )}
+      </button>
 
-      <div className="p-4 text-center text-sm border-t border-blue-700">
-        © {new Date().getFullYear()} ROBO LAB
+      {/* Sidebar */}
+      <div
+        className={`bg-blue-900 text-black flex flex-col transition-all duration-300 overflow-hidden
+        ${isMenuOpen ? 'fixed w-52 h-full left-0' : 'fixed w-0 left-[-100%]'} 
+        md:static md:w-20 md:h-full md:hover:w-52`}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+      >
+        <ul className="flex-grow mt-4 space-y-2 px-2">
+          {menu.map((item, index) => (
+            <li
+              key={index}
+              className="p-3 rounded-md hover:bg-blue-800 cursor-pointer"
+            >
+              <NavLink
+                to={item.route}
+                className="flex items-center bg-white text-black py-3 px-2 rounded-md"
+                activeClassName="bg-blue-900 text-white"
+                onClick={() => setIsMenuOpen(false)} // Close sidebar on link click
+              >
+                <span className="text-lg">{item.icon}</span>
+                {/* Show labels when menu is open on small screens or expanded on large screens */}
+                {(isMenuOpen || isExpanded) && (
+                  <span className="text-md ml-2 text-black font-medium">
+                    {item.label}
+                  </span>
+                )}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
