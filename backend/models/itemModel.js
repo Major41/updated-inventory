@@ -38,7 +38,7 @@ const itemSchema = new mongoose.Schema(
       ],
       required: function () {
         // Section is required only for CabinetA and CabinetB
-        return this.location === 'CabinetA';
+        return this.location === 'CabinetA' || this.location === 'CabinetB';
       },
     },
     name: {

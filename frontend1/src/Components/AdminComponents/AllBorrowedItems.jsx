@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext/AuthContext';
 import ApproveRequest from './ApproveRequest';
 import API from '../../API/Api';
@@ -37,7 +38,12 @@ const AllBorrowedItems = () => {
 
   return (
     <div className="w-[95%] mx-auto px-4 py-8 overflow-hidden ">
-      <h1 className="text-3xl font-semibold mb-6">Borrowed Equipment</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-xl md:text-3xl font-semibold">Borrowed Equipment</h1>
+        <Link to='/Staff/borrowed/assign' className="px-3 py-1 rounded-full text-white bg-green-500 hover:bg-green-700 cursor-pointer">
+          Assign Student
+        </Link>
+      </div>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {!error && borrowedItems.length === 0 && (
         <p className="text-gray-500">Loading...</p>
@@ -100,7 +106,7 @@ const AllBorrowedItems = () => {
                     {borrow.status !== 'approved' ? (
                       <ApproveRequest borrowId={borrow._id} />
                     ) : (
-                      <span className='cursor-pointer'>Approved</span>
+                      <span className="cursor-pointer">Approved</span>
                     )}
                   </td>
                 </tr>

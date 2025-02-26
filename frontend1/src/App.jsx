@@ -29,66 +29,70 @@ import { AuthProvider } from './AuthContext/AuthContext';
 import AllBorrowedItems from './Components/AdminComponents/AllBorrowedItems';
 import ItemList from './Components/UserComponents/Items';
 import Items from './Components/AdminComponents/Items';
+import StaffBorrowForm from './Components/AdminComponents/StaffBorrowForm';
+
+
 function App() {
   return (
     <Router>
       <AuthProvider>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/resetpassword/" element={<ResetPassword />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/resetpassword/" element={<ResetPassword />} />
 
-        {/* Admin Dashboard */}
-        <Route element={<ProtectedRoute role="admin" />}>
-          <Route path="/Staff/*" element={<AdminDashboard />}>
-            <Route path="" element={<EquipmentChart />} />
-            <Route path="borrowed" element={<AllBorrowedItems />} />
-            <Route path="labs" element={<Layout />} />
-            <Route path="items" element={<Items />} />
-            <Route path="students" element={<StudentsList />} />
-            <Route path="profile" element={<AccountDetails />} />
-            <Route path="addItem" element={<AddItem />} />
+          {/* Admin Dashboard */}
+          <Route element={<ProtectedRoute role="admin" />}>
+            <Route path="/Staff/*" element={<AdminDashboard />}>
+              <Route path="" element={<EquipmentChart />} />
+              <Route path="borrowed" element={<AllBorrowedItems />} />
+              <Route path="borrowed/assign" element={<StaffBorrowForm />} />
+              <Route path="labs" element={<Layout />} />
+              <Route path="items" element={<Items />} />
+              <Route path="students" element={<StudentsList />} />
+              <Route path="profile" element={<AccountDetails />} />
+              <Route path="addItem" element={<AddItem />} />
+            </Route>
+
+            {/* User Dashboard with nested routes */}
+            <Route path="/Staff/labs/*" element={<Layout />}>
+              <Route path="" element={<LabSelection />} />
+              <Route path="labA" element={<LabAStorage />} />
+              <Route path="labB" element={<LabBStorage />} />
+              <Route path="labA/door2" element={<SectionSetup />} />
+              <Route path="labA/door2" element={<SectionSetup />} />
+              <Route path="labA/shelf" element={<Shelves />} />
+              <Route path="labA/trolley" element={<Trolley />} />
+              <Route path="labA/components" element={<Components />} />
+            </Route>
           </Route>
 
-          {/* User Dashboard with nested routes */}
-          <Route path="/Staff/labs/*" element={<Layout />}>
-            <Route path="" element={<LabSelection />} />
-            <Route path="labA" element={<LabAStorage />} />
-            <Route path="labB" element={<LabBStorage />} />
-            <Route path="labA/door2" element={<SectionSetup />} />
-            <Route path="labA/door2" element={<SectionSetup />} />
-            <Route path="labA/shelf" element={<Shelves />} />
-            <Route path="labA/trolley" element={<Trolley />} />
-            <Route path="labA/components" element={<Components />} />
-          </Route>
-        </Route>
+          <Route element={<ProtectedRoute role="user" />}>
+            <Route path="/Student/*" element={<UserDashboard />}>
+              <Route path="" element={<Welcome />} />
+              <Route path="borrowed" element={<BorrowedItems />} />
+              <Route path="labs" element={<Layout />} />
+              <Route path="search" element={<ItemList />} />
+              <Route path="profile" element={<AccountDetails />} />
+              <Route path="borrowed/borrow" element={<BorrowForm />} />
+              <Route path="search/borrowed/borrow" element={<BorrowForm />} />
+            </Route>
 
-        <Route element={<ProtectedRoute role="user" />}>
-          <Route path="/Student/*" element={<UserDashboard />}>
-            <Route path="" element={<Welcome />} />
-            <Route path="borrowed" element={<BorrowedItems />} />
-            <Route path="labs" element={<Layout />} />
-            <Route path="search" element={<ItemList />} />
-            <Route path="profile" element={<AccountDetails />} />
-            <Route path="borrowed/borrow" element={<BorrowForm />} />
-            <Route path="search/borrowed/borrow" element={<BorrowForm />} />
+            <Route path="/Student/labs/*" element={<Layout />}>
+              <Route path="" element={<StudentLabs />} />
+              <Route path="labA" element={<LabAStudent />} />
+              <Route path="labB" element={<LabBStorage />} />
+              <Route path="labB/bars" element={<Bars />} />
+              <Route path="labA/door2" element={<SectionSetup />} />
+              <Route path="labA/door2" element={<SectionSetup />} />
+              <Route path="labA/shelf" element={<Shelves />} />
+              <Route path="labA/trolley" element={<Trolley />} />
+              <Route path="labA/components" element={<Components />} />
+            </Route>
           </Route>
-
-          <Route path="/Student/labs/*" element={<Layout />}>
-            <Route path="" element={<StudentLabs />} />
-            <Route path="labA" element={<LabAStudent />} />
-            <Route path="labB" element={<LabBStorage />} />
-            <Route path="labB/bars" element={<Bars />} />
-            <Route path="labA/door2" element={<SectionSetup />} />
-            <Route path="labA/door2" element={<SectionSetup />} />
-            <Route path="labA/shelf" element={<Shelves />} />
-            <Route path="labA/trolley" element={<Trolley />} />
-            <Route path="labA/components" element={<Components />} />
-          </Route>
-        </Route>
-      </Routes>
+        </Routes>
       </AuthProvider>
     </Router>
   );

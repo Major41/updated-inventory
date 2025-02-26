@@ -3,7 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import API from '../../API/Api';
-
+   
 const ItemForm = () => {
   const [lab, setLab] = useState('');
   const [location, setLocation] = useState('');
@@ -15,6 +15,7 @@ const ItemForm = () => {
   const [adminUser, setAdminUser] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
+
   const locationOptions = {
     LabA: ['CabinetA', 'CabinetB', 'Trolley', 'Components'],
     LabB: [
@@ -55,21 +56,9 @@ const ItemForm = () => {
     // Loading state
     setLoading(true);
 
-    // Prepare the data to send
-    // const formData = {
-    //   lab,
-    //   location,
-    //   section,
-    //   name,
-    //   description,
-    //   quantity: parseInt(quantity, 10), // Ensure quantity is a number
-    //   category,
-    //   adminUser,
-    // };
-
     try {
       // Make the API request using Axios
-      const response = await API.post('/api/items/add', {
+      const response = await API.post('http://localhost:5000/api/items/add', {
         lab,
         location,
         section,
@@ -79,6 +68,7 @@ const ItemForm = () => {
         category,
         adminUser,
       });
+
 
       // Handle the response
       if (response.status === 200 || response.status === 201) {
@@ -97,7 +87,7 @@ const ItemForm = () => {
     } catch (error) {
       console.log(
         'Error connecting to the API:',
-        error.response?.data || error.message
+        error.response || error.message
       );
       toast.error('An error occurred while adding the item.');
     } finally {

@@ -14,6 +14,7 @@ const createItem = async (req, res) => {
       adminUser,
     } = req.body;
 
+
     // Validate if required fields are present
     if (
       !lab ||
@@ -28,7 +29,7 @@ const createItem = async (req, res) => {
     }
 
     // Check if section is required for cabinetA
-    if (location === 'cabinetA' && !section) {
+    if ((location === 'cabinetA' || location === 'cabinetB') && !section) {
       return res.status(400).json({
         message: 'Section is required for items in cabinetA',
       });
@@ -38,7 +39,7 @@ const createItem = async (req, res) => {
     const newItem = new Item({
       lab,
       location,
-      section: location === 'cabinetA' ? section : undefined, 
+      section,
       name,
       description,
       quantity,
@@ -46,7 +47,7 @@ const createItem = async (req, res) => {
       adminUser,
     });
 
-    console.log(newItem);
+
 
     // Save the new item to the database
     await newItem.save();
@@ -55,10 +56,10 @@ const createItem = async (req, res) => {
     console.log('Item added');
   } catch (error) {
     console.error(error);
+    console.log(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
-
 
 // READ all items (Admin access)
 const getAllItems = async (req, res) => {
