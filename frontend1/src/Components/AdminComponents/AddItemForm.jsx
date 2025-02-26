@@ -58,7 +58,7 @@ const ItemForm = () => {
 
     try {
       // Make the API request using Axios
-      const response = await API.post('http://localhost:5000/api/items/add', {
+      const response = await API.post('/api/items/add', {
         lab,
         location,
         section,

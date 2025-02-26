@@ -38,49 +38,15 @@ const Navbar = () => {
             to="/login"
             className="bg-transparent border text-gray-100 border-white px-2 py-1 rounded-sm hover:bg-white hover:text-blue-700 transition duration-300"
           >
-<<<<<<< HEAD
             For Staff
-=======
-            Staff
->>>>>>> a43e1a362d6a57f1c5ee0a8250ad222e3cf402f8
           </Link>
           <Link
             to="/login"
             className="text-white px-2 py-1 rounded-sm hover:bg-white hover:text-blue-700 border border-white transition duration-300"
           >
-<<<<<<< HEAD
             For Student
           </Link>
         </div>
-=======
-            Student
-          </Link>
-        </div>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button
-            type="button"
-            className="text-white focus:outline-none focus:ring-2 focus:ring-white"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-        </div>
->>>>>>> a43e1a362d6a57f1c5ee0a8250ad222e3cf402f8
       </nav>
     </div>
   );
